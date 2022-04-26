@@ -1,2 +1,2 @@
 # gear-finder
-Gear Finder for Gear Freqs
+LOCO BROCO EVENTS FINDER
