@@ -32,8 +32,13 @@ const SearchBarStyled = styled.div`
   .react-date-picker__wrapper{
     background-color: white;
   }
+
+  .react-date-picker__inputGroup__input{
+    color:black;
+  }
+
   .react-date-picker__inputGroup{
-    color: black
+    color: black;
   }
 `
 

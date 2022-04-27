@@ -71,17 +71,24 @@
 
 .nav-menu-items {
   width: 100%;
+  border-right: 5px solid rgb(85, 184, 255);
 }
 
 .navbar-toggle {
   background-color: #27272c;
-  width: 100%;
+  width: 30px;
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
 }
 
 span {
   margin-left: 16px;
+}
+
+span:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }

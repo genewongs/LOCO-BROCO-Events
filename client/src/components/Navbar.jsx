@@ -9,24 +9,29 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
-  console.log(SidebarData)
 
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
+          <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
+          </Link>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
+          <ul className='nav-menu-items'>
             <li className='navbar-toggle'>
-                <AiIcons.AiOutlineClose />
+              <Link to='#' className='menu-bars'>
+                <AiIcons.AiOutlineClose className='exit-button' onClick={showSidebar}/>
+              </Link>
             </li>
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
+                  <Link to={item.path}>
                     {item.icon}
                     <span>{item.title}</span>
+                  </Link>
                 </li>
               );
             })}

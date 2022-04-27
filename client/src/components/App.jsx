@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home.jsx';
 import Navbar from './Navbar.jsx';
 import Splash from './Splash.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -15,7 +17,7 @@ export default function App() {
     searchAPI()
       .then(response => {
         if(response.status === 200) {
-          console.log(response.data._embedded.events)
+          console.log('API DATA', response.data._embedded.events)
           setEventsData(response.data._embedded.events);
         }
       })
@@ -24,12 +26,12 @@ export default function App() {
 
   return(
     <div>
-      <Navbar />
-      <Splash />
-      <SearchBar />
-      <Events events={sampleData} />
-
-      <button onClick={searchAPI}> Click </button>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' exact element={<Home />}/>
+       </Routes>
+      </Router>
     </div>
   );
 }
