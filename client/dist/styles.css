@@ -62,16 +62,18 @@
   display: flex;
   align-items: center;
   padding: 0 16px;
-  border-radius: 4px;
+  border-radius: 4px 0px 0px 4px;
+  transition: all ease-in-out 0.2s;
 }
 
 .nav-text a:hover {
-  background-color: #1a83ff;
+  background-color: rgb(16, 155, 255);
+  transition: all ease-in-out 0.2s;
 }
 
 .nav-menu-items {
   width: 100%;
-  border-right: 5px solid rgb(85, 184, 255);
+  border-right: 5px solid rgb(16, 155, 255);
 }
 
 .navbar-toggle {

@@ -3,29 +3,31 @@ import Splash from './Splash.jsx';
 import SearchBar from './SearchBar.jsx';
 import Events from './Events.jsx';
 import sampleData from '../sampleData.js';
+import styled from 'styled-components';
 
 const { searchAPI } = require('../searchAPI.js');
 const axios = require('axios');
 
-export default function Home() {
-  const [eventsData, setEventsData] = useState([]);
+const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+`
 
-  // useEffect(() => {
-  //   searchAPI()
-  //     .then(response => {
-  //       if(response.status === 200) {
-  //         console.log('API DATA', response.data._embedded.events)
-  //         setEventsData(response.data._embedded.events);
-  //       }
-  //     })
-  //     .catch(err => console.log(err))
-  // }, []);
-
+export default function Home({ eventsData, loaded, searchEvents, hasEvents }) {
   return(
     <div>
       <Splash />
-      <SearchBar />
-      <Events events={sampleData} />
+      <SearchBar searchEvents={searchEvents} />
+      {loaded ?
+        <Events events={eventsData} hasEvents={hasEvents} />
+        :
+        <Loader>
+          <img className="loader" src="./assets/loading.gif"></img> <br></br>
+          Please allow geolocation services to find events near you..
+        </Loader>
+      }
       <button onClick={searchAPI}> Click </button>
     </div>
   )
