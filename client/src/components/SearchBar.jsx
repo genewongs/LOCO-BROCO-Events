@@ -47,25 +47,25 @@ const SearchBarStyled = styled.div`
 export default function SearchBar({ searchEvents }) {
   const [dateValue, setDateValue] = useState(new Date());
   const [query, setQuery] = useState('');
-  const [location, setLocation] = useState('');
+  const [city, setCity] = useState('');
 
   function handleInput(e) {
     const target = e.target.name;
     if(target === 'searchQuery') {
       setQuery(e.target.value);
     }
-    if(target === 'location') {
-      setLocation(e.target.value);
+    if(target === 'city') {
+      setCity(e.target.value);
     }
 
-    console.log(query, location, dateValue)
+    console.log(query, city, dateValue)
   }
 
   return(
     <SearchBarStyled>
       <form onSubmit={(event) => {
-        console.log(query, location, dateValue);
-        searchEvents(event, query, location, dateValue);
+        console.log(query, city, dateValue);
+        searchEvents(event, query, city, dateValue);
       }}>
         <input
           value={query}
@@ -77,11 +77,11 @@ export default function SearchBar({ searchEvents }) {
 
         <input
           type="text"
-          value={location}
+          value={city}
           onChange={(e) => {handleInput(e)}}
-          name='location'
+          name='city'
           className='LocationInput'
-          placeholder="Location"></input>
+          placeholder="Enter City..."></input>
 
         <DatePicker className='datePicker' value={dateValue} onChange={(date) => {setDateValue(date)}} format='MM/dd/yyyy' />
         <button></button>

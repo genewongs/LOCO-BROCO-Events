@@ -1,10 +1,11 @@
 const axios = require('axios');
+const config = require('../../config');
 
 function googleAPI(lat, long) {
   return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}
 `, {
     params: {
-      key: `AIzaSyB548bQreGu_FBVjHUMA5Gxdy6yEhi1A1Y`
+      key: config.googleKey
     }
   });
 }
