@@ -9,7 +9,7 @@ const Notification = props => {
     const id = setInterval(() => {
       setWidth(prev => {
         if (prev < 100) {
-          return prev + 1;
+          return prev + 0.5;
         }
 
         clearInterval(id);
