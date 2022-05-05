@@ -7,11 +7,19 @@ const EventsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid gray;
 
   .eventImg {
     height: 200px;
     width: 320px;
   }
+
+  .seeMore {
+    padding: 50px 0px;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.10);
+    }
 `;
 
 const EventsInner = styled.div`
@@ -19,19 +27,18 @@ const EventsInner = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   width: 1200px;
-  border: 1px solid gray;
+  border-top: 1px solid gray;
 `;
 
 
-export default function Events({ events, hasEvents }){
-  console.log('deeez' , events)
-
+export default function Events({ events, hasEvents, limit, setLimit }){
+  const maxLimit = events.length;
   return(
     <EventsContainer>
       <EventsInner>
         {hasEvents ?
-          events.map((event) => {
-            return <EventsItem event={event} />
+          events.map((event, index) => {
+            return index < limit ? (<EventsItem event={event} />) : null
           })
           :
           <div>
@@ -39,6 +46,9 @@ export default function Events({ events, hasEvents }){
           </div>
         }
       </EventsInner>
+      {limit >= maxLimit ? null :
+      <div className="seeMore" onClick={() => setLimit((prevLimit) => prevLimit+20)}> Load More... </div>
+      }
     </EventsContainer>
   )
 }

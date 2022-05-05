@@ -12,12 +12,13 @@ let eventSchema = mongoose.Schema({
   city: String,
   country: String,
   startDate: String,
+  seatmap: String,
   endDate: String,
   url: String,
   longitude: String,
   latitude: String,
   attending: Boolean,
-  intereted: Boolean,
+  interested: Boolean,
 });
 
 let Event = mongoose.model('Event', eventSchema);
@@ -28,9 +29,11 @@ module.exports = {
   },
 
   postEvent: function(data) {
-    console.log('data' , data)
-    let event = new Event(data);
-    return event.save();
+    return Event.findOneAndUpdate(data, data, {upsert: true, rawResult: true, strict: false})
   },
+
+  deleteEvent: function(event) {
+    return Event.findByIdAndDelete(event)
+  }
 
 }

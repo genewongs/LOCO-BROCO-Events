@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home.jsx';
+import Attending from './Attending.jsx';
+// import Interested from './Interested.jsx';
 import Navbar from './Navbar.jsx';
 import Splash from './Splash.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -13,6 +15,7 @@ const axios = require('axios');
 
 export default function App() {
   const [eventsData, setEventsData] = useState([]);
+  const [limit, setLimit] = useState(20);
   const [longitude, setLongitude] = useState('');
   const [latitude, setLatitude] = useState('');
   const [loaded, setLoaded] = useState(false);
@@ -25,8 +28,14 @@ export default function App() {
 
     if(longitude && latitude) {
       const location = `${latitude},${longitude}`
-      searchAPI('','','',location)
+      axios.get('/api/events', {
+        params: {
+          latlong: location,
+          size: '200'
+        }
+      })
         .then(response => {
+          console.log(response)
           if(response.status === 200) {
             setEventsData(response.data._embedded.events);
             setLoaded(true);
@@ -41,15 +50,18 @@ export default function App() {
     setLatitude(pos.coords.latitude);
   }
 
-  function searchEvents(event, query = '', city = '', date = '') {
+  function searchEvents(event, query = '', city = '', state = '', date = '') {
     event.preventDefault();
     const dateFormat = moment(date).toISOString();
-    const inputDate = `${dateFormat.split('T')[0]}T00:00:00Z`
+    const inputDate = `${dateFormat.split('T')[0]}T00:00:00Z`;
+    console.log(state)
     axios.get('/api/events', {
       params: {
         keyword: query,
         city: city,
+        stateCode: state,
         latlong: '',
+        size: '200',
         startDateTime: inputDate,
       }
     })
@@ -79,7 +91,11 @@ export default function App() {
               loaded={loaded}
               searchEvents={searchEvents}
               hasEvents={hasEvents}
+              limit={limit}
+              setLimit={setLimit}
           />}/>
+          <Route path='/Attending' exact element={<Attending title={'Attending'} limit={limit} setLimit={setLimit} />} />
+          <Route path='/InterestedEvents' exact element={<Attending title={'Interested'} limit={limit} setLimit={setLimit} />} />
        </Routes>
       </Router>
     </div>

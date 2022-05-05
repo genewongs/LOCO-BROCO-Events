@@ -23,5 +23,11 @@ module.exports = {
     db.postEvent(req.body)
       .then(results => res.send(results))
       .catch(err => console.log(err));
+  },
+
+  delete: function(req, res) {
+    db.deleteEvent(req.body)
+      .then(results => res.send(results))
+      .catch(err => console.log(err));
   }
 }
