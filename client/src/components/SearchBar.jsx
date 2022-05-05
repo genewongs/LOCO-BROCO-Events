@@ -135,6 +135,9 @@ export default function SearchBar({ searchEvents }) {
     <SearchBarStyled>
       <form onSubmit={(event) => {
         searchEvents(event, query, city, stateMap[state], dateValue);
+        setQuery('');
+        setState('');
+        setCity('');
       }}>
         <input
           value={query}

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {useNotification} from "./NotificationProvider.jsx";
+
 import Home from './Home.jsx';
 import Attending from './Attending.jsx';
-// import Interested from './Interested.jsx';
 import Navbar from './Navbar.jsx';
 import Splash from './Splash.jsx';
 import SearchBar from './SearchBar.jsx';
 import Events from './Events.jsx';
-import sampleData from '../sampleData.js';
-import moment from 'moment';
 
+import moment from 'moment';
 const { searchAPI } = require('../searchAPI.js');
 const axios = require('axios');
 
@@ -20,10 +20,20 @@ export default function App() {
   const [latitude, setLatitude] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [hasEvents, setHasEvents] = useState(true);
+  const [locationGranted, setLocationGranted] = useState(true);
+  const dispatch = useNotification();
+
+  const handleNewNotification = (type, msg) => {
+    dispatch({
+      type: type,
+      message: msg,
+      title: "Successful Request"
+    })
+  }
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(setLocation);
+      navigator.geolocation.getCurrentPosition(setLocation, () => {setTimeout(setLocationGranted(false), 5000)});
     }
 
     if(longitude && latitude) {
@@ -35,7 +45,6 @@ export default function App() {
         }
       })
         .then(response => {
-          console.log(response)
           if(response.status === 200) {
             setEventsData(response.data._embedded.events);
             setLoaded(true);
@@ -48,13 +57,13 @@ export default function App() {
   function setLocation(pos) {
     setLongitude(pos.coords.longitude);
     setLatitude(pos.coords.latitude);
+    setLocationGranted(true);
   }
 
   function searchEvents(event, query = '', city = '', state = '', date = '') {
     event.preventDefault();
     const dateFormat = moment(date).toISOString();
     const inputDate = `${dateFormat.split('T')[0]}T00:00:00Z`;
-    console.log(state)
     axios.get('/api/events', {
       params: {
         keyword: query,
@@ -93,9 +102,21 @@ export default function App() {
               hasEvents={hasEvents}
               limit={limit}
               setLimit={setLimit}
+              permissions={locationGranted}
+              notification={handleNewNotification}
           />}/>
-          <Route path='/Attending' exact element={<Attending title={'Attending'} limit={limit} setLimit={setLimit} />} />
-          <Route path='/InterestedEvents' exact element={<Attending title={'Interested'} limit={limit} setLimit={setLimit} />} />
+          <Route path='/Attending' exact element={
+            <Attending
+              notification={handleNewNotification}
+              title={'Attending'}
+              limit={limit}
+             setLimit={setLimit} />} />
+          <Route path='/InterestedEvents' exact element={
+            <Attending
+              notification={handleNewNotification}
+              title={'Interested'}
+              limit={limit}
+              setLimit={setLimit} />} />
        </Routes>
       </Router>
     </div>

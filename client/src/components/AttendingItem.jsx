@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import axios from 'axios';
+import helper from '../helper.js';
 
 const EventItemStyled = styled.div`
   display: flex;
@@ -81,6 +82,7 @@ const ButtonContainer = styled.div`
     border-radius: 20px;
     transition: all ease-in-out 0.1s;
     &:hover {
+      cursor: pointer;
       background-color: black;
       color: white;
       transition: all ease-in-out 0.1s;
@@ -88,11 +90,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export default function AttendingItem({ event, removeEvent }) {
-  function handleInterest(event){
-
-  }
-
+export default function AttendingItem({ title, event, removeEvent, notification }) {
   return(
     <EventItemStyled>
       <h2><a href={event.url} target="_blank">{event.title} </a> </h2> <br></br>
@@ -107,7 +105,15 @@ export default function AttendingItem({ event, removeEvent }) {
 
       <div className="event-info">Start Date: {moment(`${event.date}`).format('dddd, MMMM Do YYYY -  h:mm a')}</div>
       <ButtonContainer>
-        <button onClick={() => {removeEvent(event)}}>Remove Event</button>
+        {title === 'Interested' ? <button onClick={() => {
+          helper.attendSwitch(event);
+          removeEvent(event);
+          notification("SUCCESS", "You Are Now Going To This Event!");
+          }}> Going! </button> : null}
+        <button onClick={() => {
+          removeEvent(event)
+          notification("ERROR", "Event Removed")
+          }}>Remove Event</button>
       </ButtonContainer>
 
     </EventItemStyled>

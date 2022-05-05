@@ -10,7 +10,6 @@ module.exports = {
   },
 
   searchAPI: function (req, res) {
-    console.log('query here', req.query);
     const batman = {...req.query, apikey: config.apikey}
     return axios.get(`http://app.ticketmaster.com/discovery/v2/events.json`, {
       params: batman

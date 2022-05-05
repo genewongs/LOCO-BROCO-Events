@@ -1,5 +1,5 @@
 import React from 'react';
-import EventsItem from './EventsItem'
+import EventsItem from './EventsItem';
 import styled from 'styled-components';
 
 const EventsContainer = styled.div`
@@ -7,7 +7,6 @@ const EventsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid gray;
 
   .eventImg {
     height: 200px;
@@ -30,15 +29,14 @@ const EventsInner = styled.div`
   border-top: 1px solid gray;
 `;
 
-
-export default function Events({ events, hasEvents, limit, setLimit }){
+export default function Events({ events, hasEvents, limit, setLimit, notification }){
   const maxLimit = events.length;
   return(
     <EventsContainer>
       <EventsInner>
         {hasEvents ?
           events.map((event, index) => {
-            return index < limit ? (<EventsItem event={event} />) : null
+            return index < limit ? (<EventsItem key={event.id} event={event} notification={notification} />) : null
           })
           :
           <div>
@@ -46,8 +44,8 @@ export default function Events({ events, hasEvents, limit, setLimit }){
           </div>
         }
       </EventsInner>
-      {limit >= maxLimit ? null :
-      <div className="seeMore" onClick={() => setLimit((prevLimit) => prevLimit+20)}> Load More... </div>
+      {limit < maxLimit && hasEvents ?
+      <div className="seeMore" onClick={() => setLimit((prevLimit) => prevLimit+20)}> Load More... </div> : null
       }
     </EventsContainer>
   )

@@ -17,27 +17,24 @@ const Loader = styled.div`
   }
 `
 
-export default function Home({ eventsData, loaded, searchEvents, hasEvents, limit, setLimit }) {
+export default function Home({ eventsData, loaded, searchEvents, hasEvents, limit, setLimit, permissions, notification }) {
   const [page, setPage] = useState('events');
-
-  function renderPage(input = 'events') {
-    if(input === 'events') {
-      return <Events events={eventsData} hasEvents={hasEvents} limit={limit} setLimit={setLimit} />
-    }
-  }
 
   return(
     <div>
       <Splash />
       <SearchBar searchEvents={searchEvents} />
       {loaded ?
-        renderPage()
+        <Events events={eventsData} hasEvents={hasEvents} limit={limit} setLimit={setLimit} notification={notification} />
         :
         <Loader>
-          <img className="loader" src="./assets/loading.gif"></img>
+        {permissions ?
           <div>
-            Please allow geolocation services to find events near you!
-          </div>
+            <img className="loader" src="./assets/loading.gif"></img>
+            <div> Loading events near you... </div>
+          </div> :
+          <div> Please allow geolcation services to find events near you or start searching now! </div>
+        }
         </Loader>
       }
     </div>

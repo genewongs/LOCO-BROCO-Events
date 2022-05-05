@@ -25,7 +25,7 @@ const AttendingInner = styled.div`
 `;
 
 
-export default function Attending({ title }){
+export default function Attending({ title, notification }){
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -42,7 +42,6 @@ export default function Attending({ title }){
         filtered = result.data.filter(x => x.interested)
       }
       setEvents(filtered);
-      console.log('filtered', filtered);
     })
     .catch(err => console.log(err))
   }
@@ -64,7 +63,12 @@ export default function Attending({ title }){
       <h2>{title}</h2>
       <AttendingInner>
           {events.map((event) => {
-            return <AttendingItem title={title} event={event} removeEvent={removeEvent} />
+            return <AttendingItem
+              key={event.eventId}
+              title={title}
+              event={event}
+              removeEvent={removeEvent}
+              notification={notification} />
           })}
       </AttendingInner>
     </AttendingContainer>
