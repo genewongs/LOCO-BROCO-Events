@@ -16,14 +16,21 @@ AN EVENT FINDER APPLICATION
 5. Allow Geolocation servives to search for events near your current location.
 
 ## On Page Load
-
-<blockquote class="imgur-embed-pub" lang="en" data-id="5GUPFU7"><a href="https://imgur.com/5GUPFU7">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<img src="https://i.imgur.com/wWijprU.gif"></img>
+On page load, you will be asked to accept Google's geolocation services to be allowed in able to find events near you.
+If you choose to decline, you may start searching for events immediately.
+If you choose to accept, give the application just a second to load up events near you!
 
 ## Searching
-<img src=""></img>
+<img src="https://i.imgur.com/TXixcHJ.gif"></img>
+All fields in the search bar are optional. You may search for events by keyword, city, state, and date.
+Once you have results pulled from the Ticketmaster API, you have the option to click directly on the image/header to be directed to buy
 
 ## Adding Events
-<img src=""></img>
+<img src="https://i.imgur.com/5GUPFU7.gif"></img>
+You may save these events by either marking them as "Going!" or "Interested" if you sure you aren't committed to an event yet. 
+Navigate to the "My Events" section to access the events you are attending.
+Navigate to the "Interested" section to access events that you are on the fence about. From here you can decide to either remove the event or mark it as attending. <br>
 
-
+<hr>
 © Gene Wong 2022
