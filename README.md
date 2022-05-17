@@ -1,7 +1,6 @@
 # LOCO-BROCO
 LOCO BROCO EVENTS FINDER
 
-===============
 AN EVENT FINDER APPLICATION
 
 ## Running your code
@@ -15,5 +14,16 @@ AN EVENT FINDER APPLICATION
 4. Navigate to `localhost:3000` in your browser.
 
 5. Allow Geolocation servives to search for events near your current location.
+
+## On Page Load
+
+<img src=""></img>
+
+## Searching
+<img src=""></img>
+
+## Adding Events
+<img src=""></img>
+
 
 © Gene Wong 2022
