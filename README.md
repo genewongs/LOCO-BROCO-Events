@@ -17,7 +17,7 @@ AN EVENT FINDER APPLICATION
 
 ## On Page Load
 
-<img src=""></img>
+<blockquote class="imgur-embed-pub" lang="en" data-id="5GUPFU7"><a href="https://imgur.com/5GUPFU7">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ## Searching
 <img src=""></img>
