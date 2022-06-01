@@ -13,7 +13,7 @@ AN EVENT FINDER APPLICATION
 
 4. Navigate to `localhost:3000` in your browser.
 
-5. Allow Geolocation servives to search for events near your current location.
+5. Allow Geolocation services to search for events near your current location.
 
 ## On Page Load
 <img src="https://i.imgur.com/wWijprU.gif"></img><br>
