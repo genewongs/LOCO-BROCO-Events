@@ -1,7 +1,7 @@
 # LOCO-BROCO
 LOCO BROCO EVENTS FINDER
 
-An event finding location that utilizes geolocation to find events near you.
+An event finding location that utilizes geolocation to find events near you!
 Users can also search based on keywords, city, state, and by date.
 
 LOCO BROCO EVENTS makes use of the TicketMaster API to retrieve data. 
